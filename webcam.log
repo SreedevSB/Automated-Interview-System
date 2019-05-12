@@ -1,0 +1,168 @@
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:28:34] "[37mGET / HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:28:36] "[37mGET /video_viewer HTTP/1.1[0m" 200 -
+ERROR:flask.app:Exception on / [GET]
+Traceback (most recent call last):
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "F:\flask-app\server.py", line 16, in index
+    faceframes.getFaceFrames()
+  File "F:\flask-app\mlfiles\faceframes.py", line 54, in getFaceFrames
+    minSize=(30, 30),
+cv2.error: OpenCV(4.0.0) C:\projects\opencv-python\opencv\modules\objdetect\src\cascadedetect.cpp:1658: error: (-215:Assertion failed) !empty() in function 'cv::CascadeClassifier::detectMultiScale'
+
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:29:36] "[1m[35mGET / HTTP/1.1[0m" 500 -
+ERROR:flask.app:Exception on / [GET]
+Traceback (most recent call last):
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "F:\flask-app\server.py", line 16, in index
+    faceframes.getFaceFrames()
+  File "F:\flask-app\mlfiles\faceframes.py", line 54, in getFaceFrames
+    minSize=(30, 30),
+cv2.error: OpenCV(4.0.0) C:\projects\opencv-python\opencv\modules\objdetect\src\cascadedetect.cpp:1658: error: (-215:Assertion failed) !empty() in function 'cv::CascadeClassifier::detectMultiScale'
+
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:29:50] "[1m[35mGET / HTTP/1.1[0m" 500 -
+ERROR:flask.app:Exception on / [GET]
+Traceback (most recent call last):
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "F:\flask-app\server.py", line 16, in index
+    faceframes.getFaceFrames()
+  File "F:\flask-app\mlfiles\faceframes.py", line 54, in getFaceFrames
+    minSize=(30, 30),
+cv2.error: OpenCV(4.0.0) C:\projects\opencv-python\opencv\modules\objdetect\src\cascadedetect.cpp:1658: error: (-215:Assertion failed) !empty() in function 'cv::CascadeClassifier::detectMultiScale'
+
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:30:24] "[1m[35mGET / HTTP/1.1[0m" 500 -
+ERROR:flask.app:Exception on / [GET]
+Traceback (most recent call last):
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "F:\flask-app\server.py", line 16, in index
+    #faceframes.getFaceFrames()
+  File "F:\flask-app\mlfiles\faceframes.py", line 54, in getFaceFrames
+    minSize=(30, 30),
+cv2.error: OpenCV(4.0.0) C:\projects\opencv-python\opencv\modules\objdetect\src\cascadedetect.cpp:1658: error: (-215:Assertion failed) !empty() in function 'cv::CascadeClassifier::detectMultiScale'
+
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:32:05] "[1m[35mGET / HTTP/1.1[0m" 500 -
+ERROR:flask.app:Exception on / [GET]
+Traceback (most recent call last):
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "F:\flask-app\server.py", line 16, in index
+    faceframes.getFaceFrames()
+  File "F:\flask-app\mlfiles\faceframes.py", line 54, in getFaceFrames
+    minSize=(30, 30),
+cv2.error: OpenCV(4.0.0) C:\projects\opencv-python\opencv\modules\objdetect\src\cascadedetect.cpp:1658: error: (-215:Assertion failed) !empty() in function 'cv::CascadeClassifier::detectMultiScale'
+
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:32:55] "[1m[35mGET / HTTP/1.1[0m" 500 -
+ERROR:flask.app:Exception on / [GET]
+Traceback (most recent call last):
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "F:\flask-app\server.py", line 62, in index
+    minSize=(30, 30),
+cv2.error: OpenCV(4.0.0) C:\projects\opencv-python\opencv\modules\objdetect\src\cascadedetect.cpp:1658: error: (-215:Assertion failed) !empty() in function 'cv::CascadeClassifier::detectMultiScale'
+
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:35:08] "[1m[35mGET / HTTP/1.1[0m" 500 -
+ERROR:flask.app:Exception on / [GET]
+Traceback (most recent call last):
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1816, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1831, in finalize_request
+    response = self.make_response(rv)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1957, in make_response
+    'The view function did not return a valid response. The'
+TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement.
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:40:07] "[1m[35mGET / HTTP/1.1[0m" 500 -
+ERROR:flask.app:Exception on / [GET]
+Traceback (most recent call last):
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1816, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1831, in finalize_request
+    response = self.make_response(rv)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1957, in make_response
+    'The view function did not return a valid response. The'
+TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement.
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:43:05] "[1m[35mGET / HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:47:11] "[37mGET / HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:47:13] "[37mGET /video_viewer HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:48:07] "[37mGET / HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:48:08] "[37mGET /video_viewer HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:48:26] "[37mGET / HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 01:48:30] "[37mGET /video_viewer HTTP/1.1[0m" 200 -
+ERROR:flask.app:Exception on / [GET]
+Traceback (most recent call last):
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1816, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1831, in finalize_request
+    response = self.make_response(rv)
+  File "c:\users\sreedevsb\anaconda3\envs\project2\lib\site-packages\flask\app.py", line 1957, in make_response
+    'The view function did not return a valid response. The'
+TypeError: The view function did not return a valid response. The function either returned None or ended without a return statement.
+INFO:werkzeug:127.0.0.1 - - [09/May/2019 02:25:54] "[1m[35mGET / HTTP/1.1[0m" 500 -
