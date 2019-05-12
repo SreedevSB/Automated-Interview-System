@@ -2,13 +2,13 @@ from flask import Flask, render_template, Response, jsonify, request,send_from_d
 from camera import VideoCamera
 import cv2
 import sys
-from moviepy.editor import *
 import time
 
 
 import math
 import logging as log
 import datetime as dt
+
 
 app = Flask(__name__)
 
@@ -26,6 +26,8 @@ def instructions():
 @app.route('/process')
 def process():
     return render_template('process.html')
+
+
     
 @app.route('/thankyou')
 def thankyou():
@@ -46,57 +48,6 @@ def welcome():
     writetoexcel(emotion,emotion2)
     return render_template('index.html',emotion=emotion,emotion2=emotion2)
 
-def writetoexcel(em,em1):
-    # Writing to an excel  
-    # sheet using Python 
-    import xlwt 
-    from xlwt import Workbook 
-    
-    # Workbook is created 
-    wb = Workbook() 
-    e=em.tolist()
-    
-    e1=em1.tolist()
-    # add_sheet is used to create sheet. 
-    sheet1 = wb.add_sheet('Sheet 1') 
-    
-    sheet1.write(1, 0, 'Angry') 
-    sheet1.write(2, 0, 'Disgust') 
-    sheet1.write(3, 0, 'Fear') 
-    sheet1.write(4, 0, 'Happy') 
-    sheet1.write(5, 0, 'Sad') 
-    sheet1.write(6, 0, 'Surprise') 
-    sheet1.write(7, 0, 'Neutral')
-    i=0
-    sheet1.write(1, 1, str(e[i][0])); i+=1
-    sheet1.write(2, 1, str(e[i][0])) ; i+=1
-    sheet1.write(3, 1, str(e[i][0])) ; i+=1
-    sheet1.write(4, 1, str(e[i][0])) ; i+=1
-    sheet1.write(5, 1, str(e[i][0])) ; i+=1
-    sheet1.write(6, 1, str(e[i][0])) ; i+=1
-    sheet1.write(7, 1, str(e[i][0]))
-
-    i=0
-    sheet1.write(1, 2, str(e1[i][0])); i+=1
-    sheet1.write(2, 2, str(e1[i][0])) ; i+=1
-    sheet1.write(3, 2, str(e1[i][0])) ; i+=1
-    sheet1.write(4, 2, str(e1[i][0])) ; i+=1
-    sheet1.write(5, 2, str(e1[i][0])) ; i+=1
-    sheet1.write(6, 2, str(e1[i][0])) ; i+=1
-    sheet1.write(7, 2, str(e1[i][0]))
-    
-    i=0;
-    sheet1.write(1, 3, (e[i][0] *0.9) +(e1[i][0]*0.1)); i+=1
-    sheet1.write(2, 3, (e[i][0] *0.9) +(e1[i][0]*0.1)) ; i+=1
-    sheet1.write(3, 3, (e[i][0] *0.9) +(e1[i][0]*0.1)) ; i+=1
-    sheet1.write(4, 3, (e[i][0] *0.9) +(e1[i][0]*0.1)) ; i+=1
-    sheet1.write(5, 3, (e[i][0] *0.9) +(e1[i][0]*0.1)); i+=1
-    sheet1.write(6, 3, (e[i][0] *0.9) +(e1[i][0]*0.1)) ; i+=1
-    sheet1.write(7, 3, (e[i][0] *0.9) +(e1[i][0]*0.1))
-    
-    wb.save('xlwt example.xls') 
-
-
 
 
 @app.route('/record_status', methods=['POST','GET'])
@@ -109,9 +60,10 @@ def record_status():
 
     status = json['status']
     candidate=json['candidate']
+    qn=json['question']
 
     if status == "true":
-        video_camera.start_record(candidate)
+        video_camera.start_record(candidate,qn)
         return jsonify(result="started")
     else:
         video_camera.stop_record(candidate)
@@ -147,11 +99,54 @@ def fetch_audio(a,b):
 
 
 
+@app.route('/getscore/<candidate>/')
+def getscore(candidate):
+    from os.path import isfile, join,isdir
+    if(isfile("./static/{}/score.txt".format(candidate))):
+        f = open("./static/{}/score.txt".format(candidate), "r")
+        return jsonify({"score": f.read()})
+    else:
+        import json
+        score=json.loads(getcandidatescore('./static/{}-1.avi'.format(candidate),'./static/{}-1.wav'.format(candidate)))['score']
+        return render_template('score.html',score=score)
+
+
+
+
 @app.route('/cv2')
 def basiccv():
 	cap = cv2.VideoCapture(0)
 	ret, frame = cap.read()
 	return tuple(frame,"Content-Type : image/jpeg\r\n\r\n")
+
+
+@app.route('/admin/dashboard')
+def admindashboard():
+    mypath="./static/"
+    from os import listdir
+    from os.path import isfile, join,isdir
+    onlyfiles = [f for f in listdir(mypath) if isdir(join(mypath, f))]
+    return render_template('dashboard.html',onlyfiles=onlyfiles)
+
+
+
+
+
+
+def getcandidatescore(tfile1,tfile2):
+    from mlfiles import audiomodal
+    from mlfiles import videomodal
+    import json
+
+    em=videomodal.analysevideo(tfile1)
+    em1=audiomodal.analyseaudio(tfile2)
+
+    e=em.reshape(1,7)[0].tolist()
+    e1=em1.reshape(1,7)[0].tolist()
+    #print(e)
+    #print(e1)
+    del sys.modules['mlfiles']
+    return json.dumps({"score" :(e[0] *0.7) +(e1[0]*0.3)})
 
 
 if __name__ == '__main__':

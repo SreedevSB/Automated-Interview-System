@@ -4,14 +4,14 @@ import pyaudio
 import wave
 import time
 class RecordingThread (threading.Thread):
-    def __init__(self, name, camera,candidate):
+    def __init__(self, name, camera,candidate,qn):
         threading.Thread.__init__(self)
         self.name = name
         self.isRunning = True
 
         self.cap = camera
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-        filename="./static/{}.avi".format(candidate)
+        filename="./static/{}-{}.avi".format(candidate,int(qn)+1)
         self.out = cv2.VideoWriter(filename,fourcc, 20.0, (640,480))
 
     def run(self):
@@ -32,12 +32,13 @@ class RecordingThread (threading.Thread):
 
 
 class VoiceThread (threading.Thread):
-    def __init__(self, name, camera,candidate):
+    def __init__(self, name, camera,candidate,qn):
         threading.Thread.__init__(self)
         self.name = name
         self.isRunning = True
         self.startTime=0;
         self.endTime=0;
+        self.qn=qn
         self.candidate=candidate
         self.audio = pyaudio.PyAudio()
         self.audioframes=None
@@ -50,7 +51,7 @@ class VoiceThread (threading.Thread):
         RATE = 44100
         CHUNK = 1024
         RECORD_SECONDS = 5000000
-        filename="./static/{}.wav".format(self.candidate)
+        filename="./static/{}-{}.wav".format(self.candidate,int(self.qn)+1)
         WAVE_OUTPUT_FILENAME = filename
         self.startTime=time.time()
         # start Recording
@@ -129,10 +130,10 @@ class VideoCamera(object):
         else:
             return None
 
-    def start_record(self,candidate): 
+    def start_record(self,candidate,qn): 
         self.is_record = True
-        self.recordingThread = RecordingThread("Video Recording Thread", self.cap,candidate)
-        self.voiceThread = VoiceThread("Video Recording Thread", self.cap,candidate)
+        self.recordingThread = RecordingThread("Video Recording Thread", self.cap,candidate,qn)
+        self.voiceThread = VoiceThread("Video Recording Thread", self.cap,candidate,qn)
         self.recordingThread.start()
         self.voiceThread.start()
 

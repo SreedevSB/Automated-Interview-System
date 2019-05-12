@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Streaming Video Recorder</title>
+</head>
+<body>
+    <script>
+      function getScore(item){
+        fetch("http://localhost:5000/getscore/"+item+"/").then(
+          function (response){alert("dsf");
+            response.json().then(function(data){
+                document.getElementById(item).innerHTML=data['score'];
+            }).catch(function(err){console.log(err)});
+          }
+        ).catch(function(err) {
+        console.log('Fetch Error :-S', err);
+      });
+    
+      }
+    </script>
+
+  {% for i in onlyfiles %}
+  <h2>{{ i }}</h2>
+  <b id="{{ i }}">Score : </b><script>getScore("{{ i }}")</script>
+  {% endfor %}
+</body>
+</html>

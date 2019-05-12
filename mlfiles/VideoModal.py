@@ -19,10 +19,22 @@ from keras import backend as K
 from keras.preprocessing import image
 #K.set_image_dim_ordering('th')
 from pathlib import Path
-import skvideo.io
-import skvideo.datasets
 
 
+
+import tensorflow as tf
+import keras
+#cpu - gpu configuration
+config = tf.ConfigProto( device_count = {'GPU': 30 , 'CPU': 56} ) #max: 1 gpu, 56 cpu
+sess = tf.Session(config=config) 
+K.set_session(sess)
+graph = sess.graph
+
+init_g = tf.global_variables_initializer()
+init_l = tf.local_variables_initializer()
+with tf.Session() as sess:
+    sess.run(init_g)
+    sess.run(init_l)
 # In[13]:
 
 
@@ -32,10 +44,9 @@ import logging as log
 import datetime as dt
 import time
 
-
 def getFaceFrame(image):
 
-    cascPath = "./haarcascade_frontalface_default.xml"
+    cascPath = "./mlfiles/haarcascade_frontalface_default.xml"
     faceCascade = cv2.CascadeClassifier(cascPath)
 
     frame = image
@@ -90,63 +101,70 @@ def rgb2gray(rgb):
 # In[27]:
 
 
+model=load_model("./mlfiles/final (1).h5",custom_objects={'swish_activation': swish_activation})
+graph = tf.get_default_graph() 
+
+
 def analysevideo(filename):
-    emotions=list()
-    model=load_model("final (1).h5",custom_objects={'swish_activation': swish_activation})
+    emotions=list()   
     cap = cv2.VideoCapture(filename)
+    global model
+    global graph
     counter=0
-    while(cap.isOpened()):
-        if cap.get(cv2.CAP_PROP_POS_FRAMES) == cap.get(cv2.CAP_PROP_FRAME_COUNT):
-            # If the number of captured frames is equal to the total number of frames,
-            # we stop
-            break
+    
+    with graph.as_default():
+        while(cap.isOpened()):
+            if cap.get(cv2.CAP_PROP_POS_FRAMES) == cap.get(cv2.CAP_PROP_FRAME_COUNT):
+                # If the number of captured frames is equal to the total number of frames,
+                # we stop
+                break
+                
+            frameId = cap.get(1) #current frame number
+            ret, frame = cap.read()
+
+            if (ret != True):
+                break
+                
+            #videogen = skvideo.io.vreader()
+            #for frame in videogen:   
+            #print(frame)
+            #img=image.load_img(frame, color_mode = "grayscale", target_size=(48, 48))
+            #x = image.img_to_array(img)
             
-        frameId = cap.get(1) #current frame number
-        ret, frame = cap.read()
-
-        if (ret != True):
-            break
+            from PIL import Image
+            #x = rgb2gray(frame)
+            #im = Image.fromarray(x)
             
-        #videogen = skvideo.io.vreader()
-        #for frame in videogen:   
-        #print(frame)
-        #img=image.load_img(frame, color_mode = "grayscale", target_size=(48, 48))
-        #x = image.img_to_array(img)
-        
-        from PIL import Image
-        #x = rgb2gray(frame)
-        #im = Image.fromarray(x)
-        
 
-        k=getFaceFrame(frame)
-        filename ="facepics/test%d.jpg" % counter;
-        
-        if(cv2.imwrite(filename, k)):
-        
-            #k = Image.fromarray(k)
-            my_file = Path(filename)
-            if not my_file.is_file():
-                continue
-            img=image.load_img(filename, color_mode = "grayscale", target_size=(48, 48))
-            k = image.img_to_array(k).reshape(1,48,48)
-            #print(k)
+            k=getFaceFrame(frame)
+            filename ="./mlfiles/facepics/test%d.jpg" % counter;
+            
+            if(cv2.imwrite(filename, k)):
+            
+                #k = Image.fromarray(k)
+                my_file = Path(filename)
+                if not my_file.is_file():
+                    continue
+                img=image.load_img(filename, color_mode = "grayscale", target_size=(48, 48))
+                k = image.img_to_array(k).reshape(1,48,48)
+                #print(k)
 
-            if k is None:
-                continue
+                if k is None:
+                    continue
 
-            k = np.expand_dims(k, axis = 0)
-            k/=255
-            custom = model.predict(k)
-            emotions.append(custom[0])
+                k = np.expand_dims(k, axis = 0)
+                k/=255
+
+                custom = model.predict(k)
+                emotions.append(custom[0])
 
 
-            emotion_analysis(custom[0])
+                #emotion_analysis(custom[0])
 
-            x = np.array(k, 'float32')
-            x = x.reshape([48, 48]);
-            counter+=1
-            #plt.gray();plt.imshow(x);plt.show()   
-        
+                x = np.array(k, 'float32')
+                x = x.reshape([48, 48]);
+                counter+=1
+                #plt.gray();plt.imshow(x);plt.show()   
     #print ("emotions") 
     #print(len(emotions))
     esum=[0,0,0,0,0,0,0]

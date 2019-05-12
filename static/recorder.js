@@ -16,7 +16,8 @@ buttonStop.onclick = function() {
 
 
 
-function startQn(){
+function startQn(qn){
+        startTimer(60,document.getElementById('timer'));
         // var url = window.location.href + "record_status";
         buttonRecord.disabled = true;
         buttonStop.disabled = false;
@@ -35,7 +36,7 @@ function startQn(){
         }
         xhr.open("POST", "/record_status");
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(JSON.stringify({ status: "true" , candidate:"Bob"}));
+        xhr.send(JSON.stringify({ status: "true" , candidate:"Bob", question: qn }));
 }
 
 function endQn(){
@@ -56,7 +57,7 @@ function endQn(){
     }
     xhr.open("POST", "/record_status");
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify({ status: "false", candidate:"Bob"}));
+    xhr.send(JSON.stringify({ status: "false", candidate:"Bob", question:"" }));
 }
 
 
@@ -73,17 +74,18 @@ function process(n){
     $(".nextqn").css("display","none");
     if(questions[parseInt(n)]===undefined){
         window.location.href="/thankyou"
+    }else{
+        dispalyQn(questions[n]);
+        $.when(setTimeout(startQn(parseInt(n)),5000)).then(function(){
+            //alert(questions[parseInt(n)]);
+            setTimeout(function(){
+                $.when(endQn()).then(function(){
+                    $(".nextqn").attr("qn",parseInt(n)+1);
+                    $(".nextqn").css("display","block");
+                });
+            },10000);
+        });
     }
-    dispalyQn(questions[n]);
-    $.when(setTimeout(startQn(),5000)).then(function(){
-        alert(questions[parseInt(n)]);
-        setTimeout(function(){
-            $.when(endQn()).then(function(){
-                $(".nextqn").attr("qn",parseInt(n)+1);
-                $(".nextqn").css("display","block");
-            });
-        },2000);
-    });
 }
 
 $(".nextqn").click(function(){
@@ -91,3 +93,23 @@ $(".nextqn").click(function(){
 })
 
 
+startTimer=function(duration, display) {
+    var t=this;
+    var timer = duration, minutes, seconds;
+    var l=setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            t.endGame();
+            t.actuate();
+            clearInterval(l);
+        }
+    }, 1000);
+    
+}

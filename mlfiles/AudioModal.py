@@ -44,7 +44,7 @@ def analyseaudio(filename):
     opt = keras.optimizers.rmsprop(lr=0.00005, rho=0.9, epsilon=None, decay=0.0)
 
 
-    model.load_weights("model.hdf5")
+    model.load_weights("./mlfiles/model.hdf5")
 
     X1, sample_rat = librosa.load(filename, res_type='kaiser_fast')
     mfccs = np.mean(librosa.feature.mfcc(y=X1, sr=sample_rat, n_mfcc=40).T,axis=0)
