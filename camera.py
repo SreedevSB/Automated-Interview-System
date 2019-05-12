@@ -90,7 +90,8 @@ class VoiceThread (threading.Thread):
 class VideoCamera(object):
     def __init__(self):
         # Open a camera
-        self.cap = cv2.VideoCapture(0)
+        #self.cap = cv2.VideoCapture(0)
+        self.cap = cv2.VideoCapture(0 + cv2.CAP_DSHOW)
       
         # Initialize video recording environment
         self.is_record = False

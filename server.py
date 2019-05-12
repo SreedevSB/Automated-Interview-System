@@ -26,6 +26,10 @@ def instructions():
 @app.route('/process')
 def process():
     return render_template('process.html')
+    
+@app.route('/thankyou')
+def thankyou():
+    return render_template('thankyou.html')
 
 @app.route('/staticfiles/<path:path>')
 def send_static(path):
