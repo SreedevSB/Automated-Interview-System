@@ -1,0 +1,6 @@
+mlfiles/.ipynb_checkpoints/*
+mlfiles/pycache/*
+mlfiles/excel/*
+mlfiles/facepics/*
+mlfiles/testdata/*
+mlfiles/voicedata/*
