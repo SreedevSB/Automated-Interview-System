@@ -159,7 +159,15 @@ def getcandidatescore(tfile1,tfile2):
     #print(e)
     #print(e1)
     del sys.modules['mlfiles']
-    return json.dumps({"score" :(e[0] *0.7) +(e1[0]*0.3)})
+    score=0
+    score=((e[0] *0.7) +(e1[0]*0.3))*(-0.2)
+    score=score+((e[1] *0.7) +(e1[1]*0.3))*(-0.2)
+    score=score+((e[2] *0.7) +(e1[2]*0.3))*(-0.3)
+    score=score+((e[3] *0.7) +(e1[3]*0.3))*(0.8)    
+    score=score+((e[4] *0.7) +(e1[4]*0.3))*(-0.1)
+    score=score+((e[5] *0.7) +(e1[5]*0.3))*(0.15)
+    score=score+((e[6] *0.7) +(e1[6]*0.3))*(0.05)
+    return json.dumps({"score" :score})
 
 
 if __name__ == '__main__':
