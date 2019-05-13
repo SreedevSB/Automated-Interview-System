@@ -15,8 +15,9 @@
   <body>
     <div class="container box">
         <div class="row">
-            <div class="col-md-12 bg"><center><img src="./staticfiles/interviewing.svg"/></center></div>
-            <div class="col-md-12 content"><center><a href="process.html" class="btn btn-primary">Start Interview</a></center></div>
+            <div class="col-md-12 bg"><center><img src="./staticfiles/interviewing.svg"/ style="max-width: 26%;margin-top:40px"></center></div>
+            <div class="col-md-12 bg"><center><input id="name" type="text" class="form-control" style="width:30%;margin-top:20px;" placeholder ="Enter your name"></center></div>
+            <div class="col-md-12 content"><center><a href="#" class="btn btn-primary" onclick="window.location.href='/instructions?name='+document.getElementById('name').value">Start Interview</a></center></div>
         </div>
     </div>
 

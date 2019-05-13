@@ -21,7 +21,8 @@ def index():
     
 @app.route('/instructions')
 def instructions():
-    return render_template('instructions.html')
+    cname = request.args.get('name')
+    return render_template('instructions.html',cname=cname)
     
 @app.route('/process')
 def process():
@@ -106,11 +107,23 @@ def getscore(candidate):
         f = open("./static/{}/score.txt".format(candidate), "r")
         return jsonify({"score": f.read()})
     else:
-        import json
-        score=json.loads(getcandidatescore('./static/{}-1.avi'.format(candidate),'./static/{}-1.wav'.format(candidate)))['score']
-        return render_template('score.html',score=score)
+        return jsonify({"score": False})
 
-
+@app.route('/setscore/<candidate>/')
+def setscore(candidate):
+    from os.path import isfile, join,isdir
+    if(isfile("./static/{}/score.txt".format(candidate))):
+        k=0
+    else:
+        if(isdir("./static/{}".format(candidate))):
+            import json
+            score=json.loads(getcandidatescore('./static/{}/{}-1.avi'.format(candidate,candidate),'./static/{}/{}-1.wav'.format(candidate,candidate)))['score']
+            file = open("./static/{}/score.txt".format(candidate), "w") 
+            file.write(str(score))
+            file.close() 
+            return jsonify({"score":score})
+        else:
+            return jsonify({"score": False})
 
 
 @app.route('/cv2')
@@ -126,7 +139,7 @@ def admindashboard():
     from os import listdir
     from os.path import isfile, join,isdir
     onlyfiles = [f for f in listdir(mypath) if isdir(join(mypath, f))]
-    return render_template('dashboard.html',onlyfiles=onlyfiles)
+    return render_template('admin.html',onlyfiles=onlyfiles)
 
 
 

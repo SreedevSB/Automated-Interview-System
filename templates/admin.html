@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>admin</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+  <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="/staticfiles/admin.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+</head>
+<body>
+	
+    <script>
+				function getScore(item){
+					fetch("http://localhost:5000/getscore/"+item+"/").then(
+						function (response){//alert("dsf");
+							response.json().then(function(data){
+									if(data['score']!=false){
+										document.getElementById(item).innerHTML=data['score'];
+									}else{
+										document.getElementById(item+"-btn").style.display='block';
+									}
+							}).catch(function(err){console.log(err)});
+						}
+					).catch(function(err) {
+					console.log('Fetch Error :-S', err);
+				});
+			
+				}
+				function setScore(item){
+					document.getElementById(item).innerHTML="<img src=/static/loading.gif style='width:100px'>";
+					fetch("http://localhost:5000/setscore/"+item+"/").then(
+						function (response){//alert("dsf");
+							response.json().then(function(data){
+									if(data['score']!=false){
+										document.getElementById(item).innerHTML=data['score'];
+									}
+									}).catch(function(err){console.log(err)});
+
+						}).catch(function(err) {
+					console.log('Fetch Error :-S', err);
+				});
+			
+				}
+			</script>
+<div class="sidenav">
+    <div class='hh'>Logged in as <br>Admin</div>
+    <div class="menue">
+	<a href="../admin/main.php">About</a>
+	<a href="../admin/users.php">Users</a>
+	<a href="../admin/files.php">Files</a>
+	<a href="../admin/list.php">List</a></div>
+	<form action="../include/signout.php" method="POST">
+	<button class="btn signout" type="submit"><i class="fas fa-power-off"></i>Sign out</button>
+</form>
+</div>
+
+
+<div class="main">
+<div class="container">
+	<h2 align="center">List of Candidates</h2>
+	<br/>
+
+	<div align="right">
+		<button id='create_user' name="create_user" class="btn btn-success" style="display: none"><i class="far fa-plus-square"></i>Add Folder</button>
+	</div>
+
+	<div id="folder_table" class="table-responsive">
+		<table class="table table-bordered table" id="candidatetable">
+			<thead>
+				<tr>
+					<th>s.no</th>
+					<th>Candidate name</th>
+					<th>Score</th>
+					<th>Analyse</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% set j=1 %}
+				{% for i in onlyfiles %} 
+				<tr>
+					<td>{{ j }}</td>
+					<td>{{ i }}</td>
+					<td><b id="{{ i }}"></b><script>getScore("{{ i }}")</script></td>
+					<td><button id="{{ i }}-btn" class="update btn btn warning btn-xs" style="display:none" onclick="setScore('{{ i }}')">Analyse</button></td>
+				</tr>
+					{% set j=j+1 %}
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script>
+	$(document).ready( function () {
+    $('#candidatetable').DataTable();
+} );
+</script>
+</body>
+</html>

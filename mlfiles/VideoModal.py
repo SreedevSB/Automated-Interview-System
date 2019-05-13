@@ -74,7 +74,6 @@ def getFaceFrame(image):
 
     #print ("Done!")
 
-
 def emotion_analysis(emotions):
     objects = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')
     y_pos = np.arange(len(objects))

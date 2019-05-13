@@ -3,6 +3,7 @@ import threading
 import pyaudio
 import wave
 import time
+import os
 class RecordingThread (threading.Thread):
     def __init__(self, name, camera,candidate,qn):
         threading.Thread.__init__(self)
@@ -11,7 +12,7 @@ class RecordingThread (threading.Thread):
 
         self.cap = camera
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-        filename="./static/{}-{}.avi".format(candidate,int(qn)+1)
+        filename="./static/{}/{}-{}.avi".format(candidate,candidate,int(qn)+1)
         self.out = cv2.VideoWriter(filename,fourcc, 20.0, (640,480))
 
     def run(self):
@@ -51,7 +52,7 @@ class VoiceThread (threading.Thread):
         RATE = 44100
         CHUNK = 1024
         RECORD_SECONDS = 5000000
-        filename="./static/{}-{}.wav".format(self.candidate,int(self.qn)+1)
+        filename="./static/{}/{}-{}.wav".format(self.candidate,self.candidate,int(self.qn)+1)
         WAVE_OUTPUT_FILENAME = filename
         self.startTime=time.time()
         # start Recording
@@ -132,6 +133,9 @@ class VideoCamera(object):
 
     def start_record(self,candidate,qn): 
         self.is_record = True
+        from os.path import isfile, join,isdir
+        if not isdir("./static/{}".format(candidate)):
+            os.mkdir("./static/{}".format(candidate))
         self.recordingThread = RecordingThread("Video Recording Thread", self.cap,candidate,qn)
         self.voiceThread = VoiceThread("Video Recording Thread", self.cap,candidate,qn)
         self.recordingThread.start()

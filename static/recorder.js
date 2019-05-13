@@ -16,6 +16,10 @@ buttonStop.onclick = function() {
 
 
 
+var url_string = window.location.href
+var url = new URL(url_string);
+var cname = url.searchParams.get("name");
+
 function startQn(qn){
         startTimer(60,document.getElementById('timer'));
         // var url = window.location.href + "record_status";
@@ -36,7 +40,7 @@ function startQn(qn){
         }
         xhr.open("POST", "/record_status");
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-        xhr.send(JSON.stringify({ status: "true" , candidate:"Bob", question: qn }));
+        xhr.send(JSON.stringify({ status: "true" , candidate:cname , question: qn }));
 }
 
 function endQn(){
@@ -57,7 +61,7 @@ function endQn(){
     }
     xhr.open("POST", "/record_status");
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify({ status: "false", candidate:"Bob", question:"" }));
+    xhr.send(JSON.stringify({ status: "false", candidate:cname, question:"" }));
 }
 
 
