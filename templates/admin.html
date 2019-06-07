@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>admin</title>
+	<title>AI-Hire | Admin</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -82,7 +82,7 @@
 				{% set j=1 %}
 				{% for i in onlyfiles %} 
 				<tr>
-					<td>{{ j }}</td>
+					<td>{{ loop.index }}</td>
 					<td>{{ i }}</td>
 					<td><b id="{{ i }}"></b><script>getScore("{{ i }}")</script></td>
 					<td><button id="{{ i }}-btn" class="update btn btn warning btn-xs" style="display:none" onclick="setScore('{{ i }}')">Analyse</button></td>

@@ -1,0 +1,74 @@
+/* Style page content */
+.hh{
+    font-size: 15px;
+    color: white;
+    text-align: center;
+
+}
+.main {
+    margin-top: 50px;
+    margin-left: 170px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+}
+
+
+/* The sidebar menu */
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 160px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #011640 /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+   /* box-shadow: 5px 8px 18px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+}
+
+/* The navigation menu links */
+.sidenav a {
+    padding: 10px 8px 10px 0px;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: 'Roboto', sans-serif;
+    color: #818181;
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+    background:#1158E8;
+  }
+
+.menue{
+    margin-top: 45px;
+}
+.signout{
+    position: absolute;
+    width: 100%;
+    bottom: 20px;
+  
+} 
+.svg-inline--fa {
+    margin-right: 8px;
+}
+
+.table-responsive{
+    width:400px;
+    margin-left: 30%;
+}
+
+.update{
+    background: orange;
+}
+
+.update:hover{
+    background:#ea7500;
+    color: white;
+
+}

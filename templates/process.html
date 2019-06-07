@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="../staticfiles/styles.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
 
     <title>Automated Inetrview</title>
   </head>
@@ -15,14 +17,14 @@
     <div class="container box">
         <div class="row">
             <div class="col-md-7 camera">
-                <div id="recorder">
-                  <button id="record">Record</button>
-                  <button id="stop">Stop</button>
-                  <a id="download"></a>   
+                <img id="video" src="{{ url_for('video_viewer') }}">
+              </div>
+              <div class="col-md-5 question"><h4></h4> Total time :<span id="timer" style="text-align: center; font-weight: 600">10s</span>
+              <div id="recorder">
+                  <button id="record" class="btn btn-primary">START</button>
+                  <button id="stop" style="display: none">Stop</button>
+                  <a id="download" style="display:none"></a>   
                 </div>
-                <img id="video" src="{{ url_for('video_viewer') }}"></div>
-            <div class="col-md-5 question"><h4>Q2 . Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec elementum massa in neque rutrum, fringilla venenatis ipsum euismod. Nunc bibendum imperdiet lectus scelerisque tincidunt.</h4>
-              <span id="timer" style="text-align: center">01:00</span>
             <div class="btn btn-primary nextqn" style="display: none">Next Question</div>
             </div>
         </div>
