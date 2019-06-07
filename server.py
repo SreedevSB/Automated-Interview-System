@@ -105,9 +105,13 @@ def getscore(candidate):
     from os.path import isfile, join,isdir
     if(isfile("./static/{}/score.txt".format(candidate))):
         f = open("./static/{}/score.txt".format(candidate), "r")
-        return jsonify({"score": f.read()})
+        response= jsonify({"score": f.read()})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
     else:
-        return jsonify({"score": False})
+        response= jsonify({"score": False})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
 
 @app.route('/setscore/<candidate>/')
 def setscore(candidate):
@@ -121,9 +125,13 @@ def setscore(candidate):
             file = open("./static/{}/score.txt".format(candidate), "w") 
             file.write(str(score))
             file.close() 
-            return jsonify({"score":score})
+            response= jsonify({"score":score})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
         else:
-            return jsonify({"score": False})
+            response= jsonify({"score": False})
+            response.headers.add('Access-Control-Allow-Origin', '*')
+            return response
 
 
 @app.route('/cv2')
