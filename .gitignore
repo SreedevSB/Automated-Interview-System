@@ -7,3 +7,4 @@ mlfiles/testdata/*
 mlfiles/voicedata/*
 __pycache__/*
 .vscode/*
+static/*
