@@ -1,9 +1,10 @@
 body{
-    background-color:#011640;
+    /*background-color:#011640;*/
+    background:#000 url('../staticfiles/images/introbg22.jpg') no-repeat;
     font-family: Roboto;
 }
 .box{
-    background-color: #bcbcbc;
+    background-color: whitesmoke; /*#bcbcbc;*/
     padding:20px;
     height:75vh;
     margin-top:12vh;
@@ -27,7 +28,7 @@ div:after{
 }
 
 .question{
-    padding:20px;
+    padding:40px 40px 40px 20px;
 }
 .camera{
     height:75vh;
@@ -42,4 +43,25 @@ div:after{
 h2{
     text-align: center;
     margin-bottom:20px;
+}
+
+
+#record,.nextqn{
+  margin:100px auto 0px auto;
+}
+.timer{
+  text-align:center;
+  color:white;
+  font-size: 1.2em;
+  font-weight: 800;
+  position: relative;
+  top:200px;
+  left:-78px;
+  display: inline-block;
+  padding:15px 15px;
+  width:62px;
+  height: 62px;
+  background-color:#98E257;
+  border-radius: 50%;
+  border:2px solid white;
 }

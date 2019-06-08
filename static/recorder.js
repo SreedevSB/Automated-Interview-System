@@ -25,7 +25,7 @@ function startQn(qn){
         // var url = window.location.href + "record_status";
         buttonRecord.disabled = true;
         buttonStop.disabled = false;
-        
+
         // disable download link
         var downloadLink = document.getElementById("download");
         downloadLink.text = "";
@@ -45,7 +45,7 @@ function startQn(qn){
 
 function endQn(){
     buttonRecord.disabled = false;
-    buttonStop.disabled = true;    
+    buttonStop.disabled = true;
 
     // XMLHttpRequest
     var xhr = new XMLHttpRequest();
@@ -82,15 +82,19 @@ function process(n){
         window.location.href="/thankyou"
     }else{
         dispalyQn(questions[n]);
+        $(".timer .count").html(10);
         $.when(setTimeout(startQn(parseInt(n)),5000)).then(function(){
             //alert(questions[parseInt(n)]);
             //=startTimer(30,document.getElementById('timer'));
+            ct=9;
+            st=setInterval(function (){if(ct!=-1){$(".timer .count").html(ct--);}else{clearInterval(st);}},1000);
+
             setTimeout(function(){
                 $.when(endQn()).then(function(){
                     $(".nextqn").attr("qn",parseInt(n)+1);
-                    $(".nextqn").css("display","block");
+                    $(".nextqn").css("display","inline-block");
                 });
-            },9000);
+            },10000);
         });
     }
 }
@@ -118,6 +122,6 @@ startTimer=function(duration, display) {
             clearInterval(l);
         }
     }, 1000);
-    
+
 }
 }*/

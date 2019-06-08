@@ -14,29 +14,33 @@
     <title>Automated Inetrview</title>
   </head>
   <body>
-    <div class="container box">
+    <div class="container box" style="padding:0px">
         <div class="row">
             <div class="col-md-7 camera">
-                <img id="video" src="{{ url_for('video_viewer') }}">
+                <img id="video" src="{{ url_for('video_viewer') }}" style="max-height:100%">
               </div>
-              <div class="col-md-5 question"><h4></h4> Total time :<span id="timer" style="text-align: center; font-weight: 600">10s</span>
-              <div id="recorder">
-                  <button id="record" class="btn btn-primary">START</button>
-                  <button id="stop" style="display: none">Stop</button>
-                  <a id="download" style="display:none"></a>   
+              <div class="col-md-5 question">
+                <div class="timer">
+                  <span class="count">10</span>s
                 </div>
-            <div class="btn btn-primary nextqn" style="display: none">Next Question</div>
+                <h4>Press Start to start the interview</h4> Total time :<span id="timer" style="text-align: center; font-weight: 600">10s</span>
+                <div id="recorder" style="text-align:center">
+                    <div id="record" class="btn btn-primary">START</div>
+                    <button id="stop" style="display: none">Stop</button>
+                    <a id="download" style="display:none"></a>
+                    <div class="btn btn-primary nextqn" style="display: none">Next Question</div>
+                  </div>
             </div>
         </div>
     </div>
 
 
-    
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='recorder.js') }}"></script> 
+    <script type="text/javascript" src="{{ url_for('static', filename='recorder.js') }}"></script>
 
 
   </body>
