@@ -29,14 +29,15 @@ config = tf.ConfigProto( device_count = {'GPU': 30 , 'CPU': 56} ) #max: 1 gpu, 5
 sess = tf.Session(config=config) 
 K.set_session(sess)
 graph = sess.graph
+tfsession=0
 
 init_g = tf.global_variables_initializer()
 init_l = tf.local_variables_initializer()
 with tf.Session() as sess:
+    tfsession=sess
     sess.run(init_g)
     sess.run(init_l)
 # In[13]:
-
 
 import cv2
 import math
@@ -172,6 +173,7 @@ def analysevideo(filename):
     #print ("esum")
     #print(esum)
 
+    #summary_writer = tf.summary.FileWriter('./tflogs', sess.graph_def)
     objects = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')
     from sklearn.preprocessing import MinMaxScaler
     scaler=MinMaxScaler()

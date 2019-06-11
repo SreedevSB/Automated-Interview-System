@@ -22,7 +22,13 @@ from keras.layers import Dense
 from keras.utils import to_categorical
 from keras.layers import Input, Flatten, Dropout, Activation
 from keras.layers import Conv1D, MaxPooling1D
-
+init_g = tf.global_variables_initializer()
+init_l = tf.local_variables_initializer()
+tsession=0
+with tf.Session() as sess:
+    tfsession=sess
+    sess.run(init_g)
+    sess.run(init_l)
 
 # In[10]:
 
@@ -63,7 +69,7 @@ def analyseaudio(filename):
     idx=[3,5,4,1,2,6,0]
     vprobs=ot[1:].reshape(-1,1)[idx]
 
-    
+    summary_writer = tf.summary.FileWriter('./tflogs', sess.graph_def)
     objects = ('angry', 'disgust', 'fear', 'happy', 'sad', 'surprise', 'neutral')
     k=np.array([log(x+1) for x in vprobs])
     from sklearn.preprocessing import MinMaxScaler
